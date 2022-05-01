@@ -30,7 +30,12 @@ Procedure
 * Install these two required tools:  `apt-get install hostapd bridge-utils`
 * I also installed these optional helpful utils:  `apt-get install tmux mtr-tiny iptraf-ng ncdu dstat nethogs iftop htop pv pixz fping tmux vim`
 
-* Stop the ethernet and wifi devices from getting an IP address. Best to do the next few steps in one go without rebooting so that we have working networking after we're done (networking will be broken if you don't complete these steps). We need to make these changes because we're going to create a bridge to connect eth and wifi - and the bridge itself gets an IP address. On raspberry pi OS edit:  `vim /etc/dhcpcd.conf`  and add the following lines at the end of the file (figure out the actual eth and wlan devices you'll be using and use them):
+* Networking config:
+    * Best to do the next few steps in one go without rebooting so that we have working networking after we're done (networking will be broken if you don't complete these steps).
+    * Stop the ethernet and wifi devices from getting an IP address.
+        * We need to make these changes because we're going to create a bridge to connect eth and wifi - and the bridge itself gets an IP address.
+    * On raspberry pi OS edit:  `vim /etc/dhcpcd.conf`  and add the following lines at the end of the file (figure out the actual eth and wlan devices you'll be using and use them):
+
 ```
 # Ken changes below. v1.0.1 , 2022-05-01
 
@@ -44,10 +49,12 @@ static routers=192.168.1.1
 # ^ Modify these per your own network.
 ```
 
-* Add a new bridge:  `brctl addbr br0`
-* Add your eth interface to the bridge:  `brctl addif br0 eth0`
+* Bridge and networking setings:
+    * Add a new bridge:  `brctl addbr br0`
+    * Add your eth interface to the bridge:  `brctl addif br0 eth0`
 
-* Edit:  `vim /etc/network/interfaces`  and add the following lines at the end of the file (making changes to whatever you need):
+    * Edit:  `vim /etc/network/interfaces`  and add the following lines at the end of the file (making changes to whatever you need):
+
 ```
 # Additions by Ken below. v1.0.1 , 2022-05-01
 
@@ -57,7 +64,9 @@ bridge_ports eth0
 # ^ hostapd adds the wlan interface to the bridge.
 ```
 
-* Configure the access point itself:  `vim /etc/hostapd/hostapd.conf` and insert this content:
+* Access point setup:
+    * Configure the access point itself:  `vim /etc/hostapd/hostapd.conf` and insert this content:
+
 ```
 # Config file v1.0.2 , 2022-05-01  by Kenneth Aaron
 
