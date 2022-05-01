@@ -15,7 +15,7 @@ These instructions are the simplest way to setup a wifi-ethernet bridge access p
 
 * I will be using a RPI3b for this.
     * If you are using RPI3/4 with raspberry pi OS - the commands and configs should work without issues.
-    * However, you can use pretty much any hardware or OS you want - the concept will be similar, though you'd need to make some adjustments in the commands, configs, etc.
+    * However, you can use pretty much any hardware or OS you want - the concept will be similar, though you'd need to make some adjustments in the commands, configs, etc (out of scope of this guide).
     * Low spec hardware may limit your speed due to the USB adapter or 100Mbps LAN, etc - but you already know what hardware you are using and it's specs/limitations.
 * I am using a USB-wifi adapter with external antenna for better coverage. I won't use the built in RPI wifi.
 
@@ -32,8 +32,8 @@ Procedure
 
 * Networking config:
     * Best to do the next few steps and the bridge setup in one go without rebooting so that we have working networking after we're done (networking will be broken if you don't complete these steps).
-    * We are going to stop the ethernet and wifi devices from getting an IP address.
-        * We need to make these changes because we're going to create a bridge to connect eth and wifi - and the bridge itself gets an IP address.
+    * First, we need to stop the ethernet and wifi devices from getting an IP address.
+        * We need to make these changes because we're going to create a bridge to connect eth and wifi - and the bridge itself gets an IP address (and not the individual devices).
     * On raspberry pi OS edit:  `vim /etc/dhcpcd.conf`  and add the following lines at the end of the file (figure out the actual eth and wlan devices you'll be using and use them):
 
 ```
@@ -150,6 +150,6 @@ Troubleshooting
 * If it doesn't work (you won't even see the AP when you scan for it) - try this:
     * `systemctl status hostapd.service`
     * If you get:  `hostapd.service    Loaded: masked (Reason: Unit hostapd.service is masked.)    Active: inactive (dead)`
-        * Fit it with:  `systemctl unmask hostapd`
+        * Fix it with:  `systemctl unmask hostapd`
 
 
