@@ -1,27 +1,31 @@
 # wifiap
 
-So why yet another tutorial? The internet is full of blogs that show how to do this.
+So why yet another guide? The internet is full of blogs/tutorials that show how to do this.
 
 
 These instructions are the simplest way to setup a wifi-ethernet bridge access point for the following use case:
-* Already have a wired network with DHCP, router, NAT, etc?
-* Just need to add another wifi access point, maybe to add coverage further out?
+* You already have a wired network with DHCP, router, NAT, etc.
+* Just need to add another wifi access point, maybe to add coverage further out.
 * Client IPs will be assigned by your already-existing infrastructure.
 * We won't be adding another NAT (in the AP) to your network.
 * No DNS caching, no extra DHCP server. Just a simple wifi to ethernet bridge.
-* Focused instructions to get you operational faster. I'm not explaining how to install OS, how to edit files, etc - I assume you know all of this. Just focusing on the task at hand.
+* Focused guide to get you operational faster with less reading to do. No tutorial on how to install OS, how to edit files, etc. Just focusing on the task at hand.
 
-Is this what you need? Then continue reading.
+**Is this what you need? Then continue reading.**
 
-* I will be using a RPI3b for this. You can use pretty much anything you want - the process will be similar. Low spec hardware may limit your speed due to the USB adapter or 100Mbps LAN, etc - but you already know what hardware you are using and it's specs/limitations.
+* I will be using a RPI3b for this.
+    * If you are using RPI3/4 with raspberry pi OS - the commands and configs should work without issues.
+    * However, you can use pretty much any hardware or OS you want - the concept will be similar, though you'd need to make some adjustments in the commands, configs, etc.
+    * Low spec hardware may limit your speed due to the USB adapter or 100Mbps LAN, etc - but you already know what hardware you are using and it's specs/limitations.
 * I am using a USB-wifi adapter with external antenna for better coverage. I won't use the built in RPI wifi.
 
 
 Procedure
 =========
 
-* Install the OS of your choice on the device of your choice. For this project I downloaded the raspberry pi OS from their official site and burned it to SD card per their instructions, then I used the `raspi-config` tool to tidy it up and open ssh access.
-* I'm using debian style `apt` commands, modify as required if you're on a different distro.
+* Install the OS of your choice on the device of your choice.
+    * For this project I downloaded the raspberry pi OS from their official site and burned it to SD card per their instructions, then I used the `raspi-config` tool to tidy it up and open ssh access.
+    * Raspberry pi OS uses debian style `apt` commands, modify as required if you're on a different distro.
 * Prepare your device and OS and configure it to a working state where the ethernet interface is functional.
 * Install these two required tools:  `apt-get install hostapd bridge-utils`
 * I also installed these optional helpful utils:  `apt-get install tmux mtr-tiny iptraf-ng ncdu dstat nethogs iftop htop pv pixz fping tmux vim`
