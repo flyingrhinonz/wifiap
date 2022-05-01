@@ -31,8 +31,8 @@ Procedure
 * I also installed these optional helpful utils:  `apt-get install tmux mtr-tiny iptraf-ng ncdu dstat nethogs iftop htop pv pixz fping tmux vim`
 
 * Networking config:
-    * Best to do the next few steps in one go without rebooting so that we have working networking after we're done (networking will be broken if you don't complete these steps).
-    * Stop the ethernet and wifi devices from getting an IP address.
+    * Best to do the next few steps and the bridge setup in one go without rebooting so that we have working networking after we're done (networking will be broken if you don't complete these steps).
+    * We are going to stop the ethernet and wifi devices from getting an IP address.
         * We need to make these changes because we're going to create a bridge to connect eth and wifi - and the bridge itself gets an IP address.
     * On raspberry pi OS edit:  `vim /etc/dhcpcd.conf`  and add the following lines at the end of the file (figure out the actual eth and wlan devices you'll be using and use them):
 
@@ -147,6 +147,9 @@ logger_syslog_level=2
 Troubleshooting
 ===============
 
-* If it doesn't work (you won't even see the AP when you scan for it) - try this:  `systemctl status hostapd.service`  and if you get:  `hostapd.service    Loaded: masked (Reason: Unit hostapd.service is masked.)    Active: inactive (dead)`  then do the unmask command above.
+* If it doesn't work (you won't even see the AP when you scan for it) - try this:
+    * `systemctl status hostapd.service`
+    * If you get:  `hostapd.service    Loaded: masked (Reason: Unit hostapd.service is masked.)    Active: inactive (dead)`
+        * Fit it with:  `systemctl unmask hostapd`
 
 
