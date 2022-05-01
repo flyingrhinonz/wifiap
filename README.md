@@ -128,12 +128,12 @@ logger_syslog_level=2
 
 * You may need to unmask the hostapd service to allow it to run:  `systemctl unmask hostapd`
 
-* Reboot and test that it works.
+* Reboot and test that it works by searching for this AP and connecting your device to it.
 
 
 Troubleshooting
 ===============
 
-* If it doesn't load - try this:  `systemctl status hostapd.service`  and if you get:  `hostapd.service    Loaded: masked (Reason: Unit hostapd.service is masked.)    Active: inactive (dead)`  then do the unmask command above.
+* If it doesn't work (you won't even see the AP when you scan for it) - try this:  `systemctl status hostapd.service`  and if you get:  `hostapd.service    Loaded: masked (Reason: Unit hostapd.service is masked.)    Active: inactive (dead)`  then do the unmask command above.
 
 
