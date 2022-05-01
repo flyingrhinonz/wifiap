@@ -14,7 +14,7 @@ These instructions are the simplest way to setup a wifi-ethernet bridge access p
 **Is this what you need? Then continue reading.**
 
 * I will be using a RPI3b for this.
-    * If you are using RPI3/4 with raspberry pi OS - the commands and configs should work without issues.
+    * If you are using RPI3/4 with raspberry pi OS - the commands and configs should work without issues and you should have a working solution by the end of this page.
     * However, you can use pretty much any hardware or OS you want - the concept will be similar, though you'd need to make some adjustments in the commands, configs, etc (out of scope of this guide).
     * Low spec hardware may limit your speed due to the USB adapter or 100Mbps LAN, etc - but you already know what hardware you are using and it's specs/limitations.
 * I am using a USB-wifi adapter with external antenna for better coverage. I won't use the built in RPI wifi.
@@ -28,13 +28,14 @@ Procedure
     * Raspberry pi OS uses debian style `apt` commands, modify as required if you're on a different distro.
 * Prepare your device and OS and configure it to a working state where the ethernet interface is functional.
 * Install these two required tools:  `apt-get install hostapd bridge-utils`
-* I also installed these optional helpful utils:  `apt-get install tmux mtr-tiny iptraf-ng ncdu dstat nethogs iftop htop pv pixz fping tmux vim`
+* I also installed these optional helpful utils:  `apt-get install tmux mtr-tiny iptraf-ng ncdu dstat nethogs iftop htop pv pixz fping vim`
 
 * Networking config:
     * Best to do the next few steps and the bridge setup in one go without rebooting so that we have working networking after we're done (networking will be broken if you don't complete these steps).
     * First, we need to stop the ethernet and wifi devices from getting an IP address.
         * We need to make these changes because we're going to create a bridge to connect eth and wifi - and the bridge itself gets an IP address (and not the individual devices).
     * On raspberry pi OS edit:  `vim /etc/dhcpcd.conf`  and add the following lines at the end of the file (figure out the actual eth and wlan devices you'll be using and use them):
+        * Note - configuring networking can vary greatly between distros.
 
 ```
 # Ken changes below. v1.0.1 , 2022-05-01
