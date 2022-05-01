@@ -6,10 +6,10 @@ So why yet another tutorial? The internet is full of blogs that show how to do t
 These instructions are the simplest way to setup a wifi-ethernet bridge access point for the following use case:
 * Already have a wired network with DHCP, router, NAT, etc?
 * Just need to add another wifi access point, maybe to add coverage further out?
-* Client IPs will be assigned by your already existing infrastructure.
+* Client IPs will be assigned by your already-existing infrastructure.
 * We won't be adding another NAT (in the AP) to your network.
 * No DNS caching, no extra DHCP server. Just a simple wifi to ethernet bridge.
-* To-the-point instructions to get you operational faster. I'm not explaining how to install OS, how to edit files, etc - I assume you know all of this. Just focusing on the task at hand.
+* Focused instructions to get you operational faster. I'm not explaining how to install OS, how to edit files, etc - I assume you know all of this. Just focusing on the task at hand.
 
 Is this what you need? Then continue reading.
 
@@ -37,6 +37,7 @@ denyinterfaces wlan1
 interface br0
 static ip_address=192.168.1.4/24
 static routers=192.168.1.1
+# ^ Modify these per your own network.
 ```
 
 * Add a new bridge:  `brctl addbr br0`
@@ -103,7 +104,7 @@ auth_algs=1
 #   1=wpa, 2=wep, 3=both
 
 ignore_broadcast_ssid=0
-# Require clients to know the network name
+# Dont require clients to know the network name
 
 wpa=2
 # ^ Use WPA2
@@ -125,6 +126,14 @@ logger_syslog_level=2
 
 * Tell hostapd to use our newly created file:  `vim /etc/default/hostapd`  and edit/create this config line:  `DAEMON_CONF="/etc/hostapd/hostapd.conf"`
 
+* You may need to unmask the hostapd service to allow it to run:  `systemctl unmask hostapd`
+
 * Reboot and test that it works.
+
+
+Troubleshooting
+===============
+
+* If it doesn't load - try this:  `systemctl status hostapd.service`  and if you get:  `hostapd.service    Loaded: masked (Reason: Unit hostapd.service is masked.)    Active: inactive (dead)`  then do the unmask command above.
 
 
