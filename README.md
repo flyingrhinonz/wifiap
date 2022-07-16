@@ -25,6 +25,8 @@ Procedure
 
 * Install the OS of your choice on the device of your choice.
     * For this project I downloaded the raspberry pi OS from their official site and burned it to SD card per their instructions, then I used the `raspi-config` tool to tidy it up and open ssh access.
+        * I also configured the wifi country using:  `raspi-config`  to prevent this message:
+            `Wi-Fi is currently blocked by rfkill. Use raspi-config to set the country before use.`
     * Raspberry pi OS uses debian style `apt` commands, modify as required if you're on a different distro.
 * Prepare your device and OS and configure it to a working state where the ethernet interface is functional.
 * Install these two required tools:  `apt-get install hostapd bridge-utils`
@@ -107,8 +109,8 @@ ieee80211n=1
 # ^ Enable 802.11n
 
 wmm_enabled=1
-# Enable WMM
-# QoS support, also required for full speed on 802.11n/ac/ax
+# ^ Enable WMM
+#   QoS support, also required for full speed on 802.11n/ac/ax
 
 macaddr_acl=0
 # ^ Accept all MAC addresses
@@ -118,7 +120,7 @@ auth_algs=1
 #   1=wpa, 2=wep, 3=both
 
 ignore_broadcast_ssid=0
-# Dont require clients to know the network name
+# ^ Dont require clients to know the network name
 
 wpa=2
 # ^ Use WPA2
